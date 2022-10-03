@@ -1,6 +1,7 @@
 import pickle
 import pandas as pd
 import numpy as np
+import os
 from django.conf import settings
 
 from rest_framework.views import APIView
@@ -163,8 +164,12 @@ class Kickstarter(APIView):
             # create a dataframe
             df = pd.DataFrame(data)
             # load the model
-            with open(settings.BASE_DIR + '\\kickstarter\\model\\svc_model.pkl', 'rb') as f:
-                model = pickle.load(f)
+            if not 'WEBSITE_HOSTNAME' in os.environ:
+                with open(settings.BASE_DIR + '\\kickstarter\\model\\svc_model.pkl', 'rb') as f:
+                    model = pickle.load(f)
+            else:
+                with open(settings.BASE_DIR + '/kickstarter/model/svc_model.pkl', 'rb') as f:
+                    model = pickle.load(f)
             # scale
             X = df
             X[['backers_count', 'campaign_duration_days', 'char_count', 'goal_usd']] = \
