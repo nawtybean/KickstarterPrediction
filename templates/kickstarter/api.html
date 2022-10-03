@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Kickstarter Campaign Prediction
+{% endblock title %}
+
+{% block style %}
+<style>
+    [class^='select2'] {
+        border-radius: 15px !important;
+    }
+</style>
+{% endblock style %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="TitleBar">
+            <h1 class="PageTitle">
+                Kickstarter Api
+            </h1>
+        </div>
+    </div>
+    <div style="display:none" id="progress-bar">
+        <div class="loader12"></div>
+    </div>
+
+    <div class="container-fluid">
+        The goal behind this API is for other developers to use this prediction model in their own applications.
+        <div display: block;>The API end point for predicting Kickstarter Campaigns is: <b>https://nawtybean3d.pythonanywhere.com/kickstarter/kickstarter/</b></div>
+        <br>
+        <div display: block;>Headers: <b>application/json</b></div>
+        <div display: block;>Type: <b>POST</b></div>
+        <div display: block;>Auth: <b>None</b></div>
+        <br>
+        <div display: block;>Sample Json:</div>
+        <code>
+            <div display: block;><b>{"title": "Amazing Playing Cards: The playing cards that are truly amazing",</b></div>
+            <div display: block;><b>"description": "These playing cards are fun for the whole family. Toss them and turn them. Share and play.",</b></div>
+            <div display: block;><b>"backers": "350",</b></div>
+            <div display: block;><b>"campaign": "30",</b></div>
+            <div display: block;><b>"goal": "50000", </b></div>
+            <div display: block;><b>"category": "3", </b></div>
+            <div display: block;><b>"country": "1",</b></div>
+            <div display: block;><b>"staff_pick": "on"}</b></div>
+        </code>
+        <br>
+        <div display: block;>Sample Response:</div>
+        <code>
+            <div display: block;><b>{"prediction": "Successful",</b></div>
+            <div display: block;><b>"character_count": 90,</b></div>
+            <div display: block;><b>"two_part_title": "yes",</b></div>
+        </code>
+        <br>
+        <a href="{% url 'kickstarter' %}" class="btn btn-info" role="button">Goto API</a>
+    </div>
+
+{% endblock body %}
+
+{% block javascript %}
+
+{% endblock javascript %}

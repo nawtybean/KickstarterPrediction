@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Kickstarter Campaign Prediction
+{% endblock title %}
+
+{% block style %}
+<style>
+    [class^='select2'] {
+        border-radius: 15px !important;
+    }
+</style>
+{% endblock style %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="TitleBar">
+            <h1 class="PageTitle">
+                Kickstarter Campaign Prediction
+            </h1>
+        </div>
+    </div>
+    <div style="display:none" id="progress-bar">
+        <div class="loader12"></div>
+    </div>
+
+    {% include 'kickstarter/modals/prediction.html' %}
+
+    <div class="container-fluid">
+        <form action="kickstarter/" method="POST" enctype="multipart/form-data" id="post-kickstarter-data">
+            <div class="form-group">
+                <label style="color:gray!important" for="Title">Enter Kickstarter Campaign Title*</label>
+                <input type="text" placeholder="Recommended: Two Part Title" class="form-control" id="title" name="title" required>
+            </div>
+            <div class="form-group">
+                <label for="Description">Enter Kickstarter Campaign Description*</label>
+                <textarea class="form-control" id="description" name="description" rows="3" placeholder="Recommended 107-180 characters..." required></textarea>
+            </div>
+            <div class="form-group">
+                <label style="color:gray!important" for="targetBackers">Choose your Target Backer Count*</label>
+                <input type="number" min="1" step="1" placeholder="35" class="form-control" id="backers" name="backers" required>
+            </div>
+            <div class="form-group">
+                <label style="color:gray!important" for="targetCampaign">Choose your Target Campaign Duration in Days*</label>
+                <input type="number" min="1" step="1" placeholder="30" class="form-control" id="campaign" name="campaign" required>
+            </div>
+            <div class="form-group">
+                <label style="color:gray!important" for="targetGoal">Choose your Goal in USD*</label>
+                <input type="number" min="1" step="1" placeholder="4600" class="form-control" id="goal" name="goal" required>
+            </div>
+            <div class="form-group">
+                <label style="color:gray!important" for="category">Select Kickstarter Category*</label>
+                <select class="addCategorySelect" id="category" name="category"
+                        style="width: 100%">
+                    <option></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label style="color:gray!important" for="country">Select Kickstarter Country*</label>
+                <select class="addCountrySelect" id="country" name="country"
+                        style="width: 100%">
+                    <option></option>
+                </select>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="staff_pick" name="staff_pick"></input>
+                <label class="form-check-label" for="staff_pick">Staff Pick*</label>
+            </div>
+            <br>
+            <input type="submit" class="btn btn-primary" id="btnPredict" value="Predict"></input>
+        </form>
+        <br>
+    </div>
+
+{% endblock body %}
+
+{% block javascript %}
+<script>
+        let messages = new PopUpMessages();
+        var csrftoken = getCookie('csrftoken');
+
+        window.onload = function () {
+            getData();
+        };
+
+        function getData() {
+            console.log('from get data')
+            document.getElementById("progress-bar").style.display = "block";
+            $.ajax({
+                type: 'GET',
+                url: 'kickstarter',
+                success: function (data) {
+                    document.getElementById("progress-bar").style.display = "none";
+                    drawSelect(data.category, 'addCategorySelect');
+                    $("#category").select2({placeholder: "--- Please Select ---"});
+                    drawSelect(data.country, 'addCountrySelect');
+                    $("#country").select2({placeholder: "--- Please Select ---"});
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    messages.xhrError(xhr);
+                    messages.throwError(thrownError);
+                },
+            });
+        };
+
+
+        $('#post-kickstarter-data').submit(function (e) {
+        e.preventDefault();
+        var formData = new FormData(document.getElementById("post-kickstarter-data"));
+        document.getElementById("progress-bar").style.display = "block";
+        $.ajax({
+            type: $(this).attr('method'),
+            headers: {'X-CSRFToken': csrftoken},
+            url: $(this).attr('action'),
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                document.getElementById("progress-bar").style.display = "none";
+                $("#predictionModal").modal("show");
+                console.log(data)
+                document.getElementById("prediction").textContent = data.prediction;
+                document.getElementById("character_count").textContent = "Character Count: " + data.character_count;
+                document.getElementById("two_part_title").textContent = "Two Part Title Detected: " + data.two_part_title;
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                messages.xhrError(xhr);
+                messages.throwError(thrownError);
+            },
+        });
+    });
+</script>
+{% endblock javascript %}

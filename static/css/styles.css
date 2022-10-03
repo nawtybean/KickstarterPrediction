@@ -1,0 +1,261 @@
+/*** GENERIC ELEMENTS ***/
+html {
+    height: 100%
+}
+
+.h1, h1 {
+    font-size: 2rem;
+    color: rgb(24, 24, 24);
+}
+
+.form-group {
+    padding-bottom: 10px;
+}
+
+.form-control,
+.form-control:focus,
+.form-select {
+    color: #436078;
+}
+
+.form-control, .form-group select {
+    padding: 6px 15px;
+    font-size: 1rem;
+    border-radius: 25px;
+}
+
+.form-control::placeholder {
+    color: #b4bfc9;
+}
+
+label {
+    color: rgb(24, 24, 24);;
+    padding-left: 15px;
+    text-transform: uppercase;
+    font-size: 13px;
+}
+
+.btn {
+    border-radius: 25px;
+    text-transform: uppercase;
+    padding: 9px 20px 8px 20px;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.btn-link {
+    color: rgb(24, 24, 24);;
+    text-decoration: none;
+    font-weight: 400;
+}
+
+.btn-link:hover {
+    color: rgb(24, 24, 24);;
+    text-decoration: underline;
+}
+
+.btn-primary {
+    background-color: #00BBE3;
+    border-color: #00BBE3;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+    background-color: #2A4391;
+    border-color: #2A4391;
+}
+
+.btn-outline-primary,
+.btn-outline-primary:visited {
+    color: #436078;
+    border-color: #00BBE3;
+    padding: 8px 25px 9px 25px;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus,
+.btn-outline-primary:active {
+    color: rgb(24, 24, 24);;
+    background-color: #2A4391;
+    border-color: #2A4391;
+}
+
+.btn-secondary {
+    background-color: #436078;
+    border-color: #436078;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus,
+.btn-secondary:active {
+    background-color: #2A4391;
+    border-color: #2A4391;
+}
+
+/*** MODAL ***/
+input[type="submit"] {
+    width: 100%;
+    font-size: 14px;
+}
+
+/*** HEADER ***/
+.HeaderMain {
+    background-color: rgb(24, 24, 24);;
+}
+
+.logo {
+    height: 35px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.AppTitleSection {
+    margin-left: 0px;
+    padding-left: 0px;
+    border-left: 0px;
+}
+
+.WelcomeBack {
+    color: #8ea0ae;
+}
+
+.AppTitle {
+    font-size: 20px;
+}
+
+.UserGroup {
+    color: #A1AFBB;
+    font-size: 14px;
+}
+
+@media (min-width: 992px) {
+    .logo {
+        height: 50px;
+    }
+
+    .AppTitleSection {
+        border-left: 1px #D9DFE4 solid;
+        margin-left: 30px;
+        padding-left: 30px;
+    }
+
+    .AppTitle {
+        font-size: 23px;
+    }
+
+    .UserGroup {
+        font-size: 17px;
+    }
+
+    .navbar-expand-lg .navbar-nav .nav-link {
+        padding: 6px 20px 10px 20px;
+
+    }
+
+    .WelcomeBack {
+        margin-top: -27px;
+        padding-bottom: 6px;
+    }
+}
+
+@media (min-width: 768px) {
+    .WelcomeBackMain {
+        position: relative;
+    }
+
+    .WelcomeBack {
+        position: absolute;
+        right: 0px;
+        width: 500px;
+        text-align: right;
+    }
+}
+
+@media (max-width: 761px) {
+    .WelcomeBack {
+        display: none;
+    }
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: #8ea0ae;
+    text-transform: uppercase;
+}
+
+.navbar-light .navbar-nav .nav-link.active {
+    border-bottom: 1px #00BBE3 solid;
+}
+
+/*** LOGIN SCREEN ***/
+.LogoLargeInverted img {
+    width: 100%;
+    margin-bottom: 60px;
+}
+
+.Login {
+    height: 100vh;
+    min-height: 500px;
+}
+
+.LoginContainer h1 {
+    padding-bottom: 20px;
+    padding-left: 15px;
+}
+
+.LoginContainer .btn {
+    width: 100%;
+    margin: 10px 0px;
+}
+
+.ForgotPassword .btn {
+    text-align: right;
+    font-size: 14px;
+}
+
+@media (max-width: 767px) {
+    .LogoLargeInverted {
+        text-align: right;
+    }
+
+    .LogoLargeInverted img {
+        width: 200px;
+        margin-bottom: 50px;
+    }
+}
+
+/*** PAGE TITLE ***/
+.TitleBar {
+    margin-bottom: 20px;
+    width: 100%;
+    display: block;
+    float: left;
+}
+
+.PageTitle {
+    font-size: 22px;
+    font-weight: 400;
+    border-bottom: 1px #00BBE3 solid;
+    display: inline-block;
+    padding: 0px 10px 12px 10px;
+}
+
+.AdditionalInfo {
+    color: white;
+}
+
+.AdditionalInfoBottom {
+    padding-bottom: 20px;
+}
+
+.RequestDate {
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.NrCount {
+    font-size: 22px;
+    padding-left: 15px;
+}
